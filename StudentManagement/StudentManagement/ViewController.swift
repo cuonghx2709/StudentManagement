@@ -26,7 +26,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             if let acc  = NSKeyedUnarchiver.unarchiveObject(with: accountData) as? Account{
                 print(acc.user)
                 print(acc.password)
-//                loginwith(user: acc.user, password: acc.password)
+                loginwith(user: acc.user, password: acc.password)
             }
         }
         // Do any additional setup after loading the view, typically from a nib.
@@ -69,10 +69,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 print("Error")
             }else {
                 if let d = data {
-                    let student = JSON(d)
-                    if student == JSON.null {
-                        print("null")
-                        
+                    let json = JSON(d)
+                    let statusCode = json["status"].intValue;
+                    if statusCode == -1 {
                         let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
                         let alertController = UIAlertController(title: "Wrong email or password", message: nil, preferredStyle: UIAlertControllerStyle.alert)
                         alertController.addAction(action)
@@ -80,10 +79,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
                             self.present(alertController, animated: true, completion: nil)
                         }
                     }else {
-                        if let vector = student["vectors"].string {
+                        let infoStudent = json["student"]
+                        let id = infoStudent["student_id"].intValue
+                        
+                        
+                        
+                        // GET VECTORS
+                        
+                        var conv = [Array<Int>]()
+                        if let vector = infoStudent["vectors"].string {
                             print(vector)
                             let arr = vector.components(separatedBy: ",[")
-                            let conv = arr.map({ (string : String) -> [Int] in
+                            conv = arr.map({ (string : String) -> [Int] in
                                 let editedText = string.replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "]", with: "")
                                 print(editedText)
                                 let arrInt = editedText.components(separatedBy: ",").map({ (s : String) -> Int in
@@ -96,8 +103,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
                             })
                             print(conv)
                         }
+                        let userData = User(email: infoStudent["email"].stringValue, studentID: id, name: infoStudent["student_name"].stringValue, birthday: infoStudent["birthday"].stringValue, vectors: conv)
+                        userData.prin()
+                        
+                        
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let vc = storyboard.instantiateViewController(withIdentifier: "Home");
+                        let vc = storyboard.instantiateViewController(withIdentifier: "Home") as! UINavigationController
+                        let rootVC = vc.topViewController as! HomeViewController
+
+                        rootVC.student = userData
                         
                         DispatchQueue.main.async {
                             vc.view.alpha = 0;
@@ -112,6 +126,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                                 let accountData = try! Data(contentsOf: urlfile)
                                 let acc  = NSKeyedUnarchiver.unarchiveObject(with: accountData) as! Account
                                 print(acc.user)
+                                self.passwordText.text = nil
                                 
                             })
                             UIView.animate(withDuration: 3000) {
@@ -119,7 +134,20 @@ class ViewController: UIViewController, UITextFieldDelegate {
                                 self.view.alpha = 0
                             }
                         }
+                        
                     }
+                    print(statusCode)
+//                    if student == JSON.null {
+//                        print("null")
+//                        let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
+//                        let alertController = UIAlertController(title: "Wrong email or password", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+//                        alertController.addAction(action)
+//                        DispatchQueue.main.async {
+//                            self.present(alertController, animated: true, completion: nil)
+//                        }
+//                    }else {
+//                        }
+//                    }
                 }
                 
             }
@@ -131,8 +159,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func ResClick(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "RegisterScr");
+        
         vc.view.alpha = 0;
         self.present(vc, animated: false, completion: nil)
+        
         UIView.animate(withDuration: 3000) {
             vc.view.alpha = 1
             self.view.alpha = 0

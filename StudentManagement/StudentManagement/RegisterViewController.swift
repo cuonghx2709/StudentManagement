@@ -39,6 +39,15 @@ class RegisterViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    @IBAction func CancelButton(_ sender: UIButton) {
+        if let vc = self.presentingViewController {
+            vc.dismiss(animated: false, completion: nil)
+            UIView.animate(withDuration: 1000) {
+                vc.view.alpha = 1;
+            }
+        }
+        
+    }
     @IBAction func onCreateClick(_ sender: Any) {
         let email = self.email.text!
         let password = self.password.text!
@@ -61,56 +70,31 @@ class RegisterViewController: UIViewController {
                 self.confirmPassword.text = "";
             }
         }else {
-//            var url = URLComponents(string: "\(url_api)/student_register")
-//            url?.queryItems = [URLQueryItem(name: "email", value: email), URLQueryItem(name: "password", value: password)]
-//            var request = URLRequest(url: (url?.url)!)
-//            request.httpMethod = "GET"
-//
-//            let sessionConfiguration = URLSessionConfiguration.default
-//            let session = URLSession(configuration: sessionConfiguration)
-//            let task = session.dataTask(with: request) { (data, res, err) in
-            
-//                print(data)
-//                var std_id = 0;
-//                print(data?.base64EncodedString())
-//                let value = data!.withUnsafeBytes { (ptr: UnsafePointer<Double>) -> Double in
-//                    return ptr.pointee
-//                }
-//                print(data! as NSData)
-//                print(value)
-//                if std_id == -1 {
-//                    print("errr")
-//                }else {
-//                    print("success \(std_id)")
-//                }
-//            }
-//            task.resume()
             Alamofire.request("\(url_api)/student_register?email=\(email)&password=\(password)").responseJSON { (res) in
-                
-                let status = res.description
-                print(status)
-                let id = status.substring(from: status.index(after: status.index(of: " ")!))
-                let i = Int(id)
-                print(i)
-                if id == "-1" {
-                    let alert = UIAlertController(title: "Err", message: "Email already exists", preferredStyle: UIAlertControllerStyle.alert)
-                    let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
-                    alert.addAction(action)
-                    self.present(alert, animated: true, completion: nil)
-                }else {
-                    print("sucess")
-                    let i = Int(id);
-                    print(i)
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let vc = storyboard.instantiateViewController(withIdentifier: "updateScreen") as! UpdateViewController
-                    vc.student_id = i
-                    self.present(vc, animated: true, completion: nil)
-                    let fm = FileManager.default
-                    let docsurl = try! fm.url(for: FileManager.SearchPathDirectory.documentDirectory, in: FileManager.SearchPathDomainMask.userDomainMask, appropriateFor: nil, create: false)
-                    let account = Account(user: email, password: password)
-                    let saveData = NSKeyedArchiver.archivedData(withRootObject: account)
-                    let urlfile = docsurl.appendingPathComponent("account.txt")
-                    try! saveData.write(to: urlfile, options: .atomic)
+                if let data = res.data {
+                    let json = JSON(data)
+                    let status = json["status"].intValue
+                    if status == -1 {
+//                        print("-1");
+                        let alert = UIAlertController(title: "Err", message: "Email already exists", preferredStyle: UIAlertControllerStyle.alert)
+                        let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
+                        alert.addAction(action)
+                        self.present(alert, animated: true, completion: nil)
+
+                    }else {
+                        let id = json["student_id"].intValue
+                        print(id)
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let vc = storyboard.instantiateViewController(withIdentifier: "updateScreen") as! UpdateViewController
+                        vc.student_id = id
+                        self.present(vc, animated: true, completion: nil)
+                        let fm = FileManager.default
+                        let docsurl = try! fm.url(for: FileManager.SearchPathDirectory.documentDirectory, in: FileManager.SearchPathDomainMask.userDomainMask, appropriateFor: nil, create: false)
+                        let account = Account(user: email, password: password)
+                        let saveData = NSKeyedArchiver.archivedData(withRootObject: account)
+                        let urlfile = docsurl.appendingPathComponent("account.txt")
+                        try! saveData.write(to: urlfile, options: .atomic)
+                    }
                 }
             }
         }

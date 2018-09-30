@@ -44,7 +44,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done" textContentType="password"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="9Yj-4m-ehG"/>
                                 </connections>
@@ -136,7 +136,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yjc-TV-kg0">
                                 <rect key="frame" x="16" y="298" width="288" height="30"/>
@@ -145,7 +145,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hik-tL-TZS">
                                 <rect key="frame" x="16" y="376" width="288" height="39"/>
@@ -172,6 +172,9 @@
                                 <rect key="frame" x="145" y="445" width="30" height="40"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <state key="normal" title="X"/>
+                                <connections>
+                                    <action selector="CancelButton:" destination="IHy-Zz-YFE" eventType="touchUpInside" id="7Mj-WF-e7Q"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -292,7 +295,7 @@
         <scene sceneID="XKD-go-jUD">
             <objects>
                 <navigationController storyboardIdentifier="Home" id="8ki-9s-kjD" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5lN-wg-3Bt">
+                    <navigationBar key="navigationBar" autoresizesSubviews="NO" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" insetsLayoutMarginsFromSafeArea="NO" id="5lN-wg-3Bt">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -307,7 +310,7 @@
         <!--Home-->
         <scene sceneID="NGQ-ih-nne">
             <objects>
-                <viewController id="jOS-P2-t4Y" sceneMemberID="viewController">
+                <viewController id="jOS-P2-t4Y" customClass="HomeViewController" customModule="StudentManagement" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7sH-tR-OLI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -318,11 +321,11 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="125" id="kg5-Ay-Qfs"/>
                                 </constraints>
-                                <state key="normal" title="Enroll Course">
+                                <state key="normal" title="My Course">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="teI-qs-4KT" kind="push" id="jxa-Dc-Fw7"/>
+                                    <segue destination="5WD-Ib-SfH" kind="push" identifier="courses" id="nOu-FI-Ioz"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zf4-Hs-fU0">
@@ -345,7 +348,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="qzl-vK-USO" kind="push" id="Vph-VG-24I"/>
+                                    <segue destination="qzl-vK-USO" kind="push" identifier="setting" id="Vph-VG-24I"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZsR-mN-h9F">
@@ -357,6 +360,9 @@
                                 <state key="normal" title="Logout">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="onLogoutClick:" destination="jOS-P2-t4Y" eventType="touchUpInside" id="TJ9-VG-ltt"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -378,40 +384,179 @@
             </objects>
             <point key="canvasLocation" x="3547.5" y="116.19718309859155"/>
         </scene>
-        <!--Enroll Course-->
-        <scene sceneID="eMW-9k-wzH">
+        <!--Unis Table View Controller-->
+        <scene sceneID="k8d-2W-UIW">
             <objects>
-                <viewController id="teI-qs-4KT" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="rBe-9P-Pul">
+                <tableViewController id="vcE-Yh-caL" customClass="UnisTableViewController" customModule="StudentManagement" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Uk1-RS-EC3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="Pri-7k-ep0"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Enroll Course" id="dKU-rt-Fa0"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Yma-sT-KMR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" id="iCr-jH-bLn">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iCr-jH-bLn" id="dPf-Nx-QB6">
+                                    <rect key="frame" x="0.0" y="0.0" width="252" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="vcE-Yh-caL" id="Aov-Kl-g7h"/>
+                            <outlet property="delegate" destination="vcE-Yh-caL" id="q2f-ff-4vT"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="XZD-eR-VsV"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z1Z-vk-YXi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4290" y="129"/>
+            <point key="canvasLocation" x="4931" y="948"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="aN1-ep-RWj">
+        <!--Courses Table View Controller-->
+        <scene sceneID="IzM-Ch-b64">
             <objects>
-                <viewController id="x6e-IK-H0a" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="uQu-Xx-Qee">
+                <tableViewController storyboardIdentifier="courses" id="EC2-dg-0Rl" customClass="CoursesTableViewController" customModule="StudentManagement" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ZwE-O1-fAS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="33G-uQ-NCQ"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cmK-Im-dRD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="M7X-dZ-tuS">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="M7X-dZ-tuS" id="pum-aM-fuH">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="EC2-dg-0Rl" id="tPk-xR-4Mb"/>
+                            <outlet property="delegate" destination="EC2-dg-0Rl" id="O1l-cX-Mtd"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="ARv-p9-rrU"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tHK-KB-qUq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4950" y="108"/>
+            <point key="canvasLocation" x="4455" y="-736"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="Bb0-5d-P8x">
+            <objects>
+                <viewController id="PVm-VT-kfj" customClass="HomeController" customModule="StudentManagement" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tJY-99-w5l">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.8704663212435233" green="0.8704663212435233" blue="0.8704663212435233" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="sfO-0I-DKK"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Home" id="YnN-jS-OpS">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="menu" id="frK-EZ-R1E">
+                            <connections>
+                                <action selector="menuClicked:" destination="PVm-VT-kfj" id="m0l-ME-T2I"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a8y-MW-hhs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6991.875" y="303.16901408450707"/>
+        </scene>
+        <!--Menu View Controller-->
+        <scene sceneID="2So-20-ytB">
+            <objects>
+                <viewController storyboardIdentifier="MenuViewController" id="g05-an-ZtV" customClass="MenuViewController" customModule="StudentManagement" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bQs-sX-jpn">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tuc-ql-aSV">
+                                <rect key="frame" x="0.0" y="0.0" width="268" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="268" id="Aic-ca-Xga"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="g05-an-ZtV" id="LyZ-r9-5aa"/>
+                                    <outlet property="delegate" destination="g05-an-ZtV" id="hfD-Dg-vNW"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Tuc-ql-aSV" firstAttribute="top" secondItem="bQs-sX-jpn" secondAttribute="top" id="538-HD-IsR"/>
+                            <constraint firstItem="Tuc-ql-aSV" firstAttribute="leading" secondItem="LKb-jp-54f" secondAttribute="leading" id="Hrw-YH-BVt"/>
+                            <constraint firstItem="Tuc-ql-aSV" firstAttribute="bottom" secondItem="LKb-jp-54f" secondAttribute="bottom" id="UU6-LI-B9S"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="LKb-jp-54f"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Tuc-ql-aSV" id="HaK-D8-90T"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nGU-M4-KOf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7766.25" y="300"/>
+        </scene>
+        <!--My Courses-->
+        <scene sceneID="9sq-A3-nlR">
+            <objects>
+                <tableViewController storyboardIdentifier="EnrolledTableViewController" id="5WD-Ib-SfH" customClass="EnrolledTableViewController" customModule="StudentManagement" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="WrF-go-81P">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="7nB-F0-nf8">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7nB-F0-nf8" id="mo9-Hl-Jg3">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="5WD-Ib-SfH" id="3gU-O6-bVg"/>
+                            <outlet property="delegate" destination="5WD-Ib-SfH" id="ump-vB-65m"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="My Courses" id="k39-5H-WJK">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="X8Y-RD-Wih">
+                            <connections>
+                                <segue destination="vcE-Yh-caL" kind="push" id="AmU-CF-omS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QLt-p7-Ygx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3973" y="948"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="GAQ-4u-C4q">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KkX-1q-Pjw" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="o6z-2a-rnp">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="PVm-VT-kfj" kind="relationship" relationship="rootViewController" id="D7Y-rE-o5g"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dog-yG-zl5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5994.375" y="303.16901408450707"/>
         </scene>
     </scenes>
     <resources>
         <image name="avatar" width="360" height="360"/>
         <image name="logo" width="864" height="864"/>
+        <image name="menu" width="32" height="32"/>
     </resources>
 </document>

@@ -8,12 +8,13 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
 
 class UpdateViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var birthdayTextField: UITextField!
-    var student_id: Int? = 8
+    var student_id: Int? 
     @IBOutlet weak var img: UIImageView!
     
     var vectors = "[[1,1,1],[1,1,1]]"
@@ -102,14 +103,19 @@ class UpdateViewController: UIViewController, UINavigationControllerDelegate, UI
             let data : Parameters = ["student_id" : student_id!, "student_name" : name, "birthday" : birthday, "vectors" : vectors]
             Alamofire.request("\(url_api)/student_update", method: .post, parameters: data).response { (res) in
                 print("res")
-          
-                if let _ = self.navigationController {
-                    self.navigationController?.popToRootViewController(animated: true)
-                }else {
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let vc = storyboard.instantiateInitialViewController()!
-                    self.present(vc, animated: true, completion: nil)
-                    
+                if let d = res.data {
+                    let json = JSON(d)
+                    let statusCode = json["status"].intValue
+                    if statusCode == 1 {
+                        if let _ = self.navigationController {
+                            self.navigationController?.popToRootViewController(animated: true)
+                        }else {
+                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                            let vc = storyboard.instantiateInitialViewController()!
+                            self.present(vc, animated: true, completion: nil)
+                            
+                        }
+                    }
                 }
             }
         }

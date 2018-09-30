@@ -11,12 +11,12 @@ import Foundation
 class User: NSCoding  {
     
     var email : String
-    var studentID: String
+    var studentID: Int
     var name : String
     var birthday: String
     var vectors : [Array<Int>]
     
-    init(email : String, studentID: String, name : String, birthday : String, vectors : [Array<Int>]) {
+    init(email : String, studentID: Int, name : String, birthday : String, vectors : [Array<Int>]) {
         self.email = email
         self.studentID = studentID
         self.name = name
@@ -33,12 +33,14 @@ class User: NSCoding  {
     
     required init?(coder aDecoder: NSCoder) {
         self.email = aDecoder.decodeObject(forKey: "email") as! String;
-        self.studentID = aDecoder.decodeObject(forKey: "studentID") as! String
+        self.studentID = aDecoder.decodeObject(forKey: "studentID") as! Int
         self.name = aDecoder.decodeObject(forKey: "name") as! String
         self.birthday = aDecoder.decodeObject(forKey: "birthday") as! String
         self.vectors = aDecoder.decodeObject(forKey: "vectors") as! [Array<Int>]
     }
     
-    
+    func prin() {
+        print("email: \(self.email)/ studentID: \(self.studentID) / name: \(self.name) /birthday: \(self.birthday) /vectors: \(self.vectors)")
+    }
     
 }

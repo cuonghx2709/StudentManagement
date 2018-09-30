@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		952BD540216077FB005FD5E0 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952BD53F216077FB005FD5E0 /* HomeController.swift */; };
+		952BD56221608485005FD5E0 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952BD56121608485005FD5E0 /* MenuViewController.swift */; };
+		952BD564216086C6005FD5E0 /* EnrolledTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952BD563216086C6005FD5E0 /* EnrolledTableViewController.swift */; };
+		953758CA21593945004410DB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953758C921593945004410DB /* HomeViewController.swift */; };
 		9540DB092153E37400E5F4D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540DB082153E37400E5F4D4 /* AppDelegate.swift */; };
 		9540DB0B2153E37400E5F4D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540DB0A2153E37400E5F4D4 /* ViewController.swift */; };
 		9540DB0E2153E37400E5F4D4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9540DB0C2153E37400E5F4D4 /* Main.storyboard */; };
@@ -19,9 +23,16 @@
 		95BE49E12155FDBC008D50FB /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95BE49E02155FDBB008D50FB /* Alamofire.framework */; };
 		95CF1C4521562FCA00035938 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CF1C4421562FCA00035938 /* RegisterViewController.swift */; };
 		95CF1C4721564A2700035938 /* UpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CF1C4621564A2700035938 /* UpdateViewController.swift */; };
+		95F47AF42159DD6F0077CBA0 /* UnisTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F47AF32159DD6F0077CBA0 /* UnisTableViewController.swift */; };
+		95F47AF62159DFCC0077CBA0 /* ModelUniv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F47AF52159DFCC0077CBA0 /* ModelUniv.swift */; };
+		95F47AF8215A14A00077CBA0 /* CoursesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F47AF7215A14A00077CBA0 /* CoursesTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		952BD53F216077FB005FD5E0 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		952BD56121608485005FD5E0 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		952BD563216086C6005FD5E0 /* EnrolledTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrolledTableViewController.swift; sourceTree = "<group>"; };
+		953758C921593945004410DB /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		9540DB052153E37400E5F4D4 /* StudentManagement.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudentManagement.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9540DB082153E37400E5F4D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9540DB0A2153E37400E5F4D4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -36,6 +47,9 @@
 		95BE49E02155FDBB008D50FB /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		95CF1C4421562FCA00035938 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		95CF1C4621564A2700035938 /* UpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateViewController.swift; sourceTree = "<group>"; };
+		95F47AF32159DD6F0077CBA0 /* UnisTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnisTableViewController.swift; sourceTree = "<group>"; };
+		95F47AF52159DFCC0077CBA0 /* ModelUniv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelUniv.swift; sourceTree = "<group>"; };
+		95F47AF7215A14A00077CBA0 /* CoursesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,12 +90,19 @@
 				95CF1C4421562FCA00035938 /* RegisterViewController.swift */,
 				95CF1C4621564A2700035938 /* UpdateViewController.swift */,
 				9540DB0C2153E37400E5F4D4 /* Main.storyboard */,
+				952BD56121608485005FD5E0 /* MenuViewController.swift */,
+				952BD53F216077FB005FD5E0 /* HomeController.swift */,
+				953758C921593945004410DB /* HomeViewController.swift */,
 				9540DB0F2153E37600E5F4D4 /* Assets.xcassets */,
 				9540DB112153E37600E5F4D4 /* LaunchScreen.storyboard */,
 				954AA1AF21555EF6008E0816 /* Constant.swift */,
+				952BD563216086C6005FD5E0 /* EnrolledTableViewController.swift */,
 				9540DB142153E37600E5F4D4 /* Info.plist */,
 				95BE49DC2155C370008D50FB /* User.swift */,
 				95BE49DE2155E031008D50FB /* Account.swift */,
+				95F47AF32159DD6F0077CBA0 /* UnisTableViewController.swift */,
+				95F47AF7215A14A00077CBA0 /* CoursesTableViewController.swift */,
+				95F47AF52159DFCC0077CBA0 /* ModelUniv.swift */,
 			);
 			path = StudentManagement;
 			sourceTree = "<group>";
@@ -188,10 +209,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				95BE49DF2155E031008D50FB /* Account.swift in Sources */,
+				95F47AF62159DFCC0077CBA0 /* ModelUniv.swift in Sources */,
 				95BE49DD2155C370008D50FB /* User.swift in Sources */,
 				9540DB0B2153E37400E5F4D4 /* ViewController.swift in Sources */,
+				953758CA21593945004410DB /* HomeViewController.swift in Sources */,
+				95F47AF42159DD6F0077CBA0 /* UnisTableViewController.swift in Sources */,
 				95CF1C4521562FCA00035938 /* RegisterViewController.swift in Sources */,
+				952BD56221608485005FD5E0 /* MenuViewController.swift in Sources */,
+				952BD564216086C6005FD5E0 /* EnrolledTableViewController.swift in Sources */,
 				9540DB092153E37400E5F4D4 /* AppDelegate.swift in Sources */,
+				952BD540216077FB005FD5E0 /* HomeController.swift in Sources */,
+				95F47AF8215A14A00077CBA0 /* CoursesTableViewController.swift in Sources */,
 				95CF1C4721564A2700035938 /* UpdateViewController.swift in Sources */,
 				954AA1B021555EF6008E0816 /* Constant.swift in Sources */,
 			);
@@ -338,6 +366,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 68276ZV853;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -359,6 +388,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 68276ZV853;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
